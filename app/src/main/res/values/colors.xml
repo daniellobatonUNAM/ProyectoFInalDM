@@ -10,5 +10,5 @@
 
     <!-- Azul app -->
     <color name="principal">#40AEEC</color>
-
+    <color name="gris">#D3D3D3</color>
 </resources>
