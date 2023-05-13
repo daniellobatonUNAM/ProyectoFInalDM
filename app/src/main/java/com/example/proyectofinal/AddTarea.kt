@@ -3,11 +3,7 @@ package com.example.proyectofinal
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 
 class AddTarea : AppCompatActivity() {
@@ -27,6 +23,10 @@ class AddTarea : AppCompatActivity() {
 
     //Btn Añadir
     private lateinit var btnAdd: Button
+
+
+    private lateinit var conexion: BDSQLite
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +86,28 @@ class AddTarea : AppCompatActivity() {
                 Log.e("Radio de la tarea: ", "No")
 
             }
+
+
+            conexion = BDSQLite(this)
+            val modelo = ModeloTarea(conexion)
+
+
+            val idInsertado = modelo.insertarTarea(Tarea(null, "", "", 54))
+
+            if (idInsertado != -1L) {
+
+                Log.e("Insertado", "Sí")
+
+            } else {
+
+                Log.e("Insertado", "No")
+
+            }
+
+            finish()
+
+            Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
+
         }
 
     }

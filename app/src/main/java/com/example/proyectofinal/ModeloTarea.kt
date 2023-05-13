@@ -24,6 +24,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
             put(COLUMN_PORCENTAJE, tarea.porcentaje)
         }
         return db.insert(TABLE_NAME, null, contentValues)
+
     }
 
     fun obtenerTareas(): List<Tarea> {
@@ -39,7 +40,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
                 val fecha = getString(getColumnIndexOrThrow(COLUMN_FECHA))
                 val porcentaje = getInt(getColumnIndexOrThrow(COLUMN_PORCENTAJE))
 
-                val tarea = Tarea(id, titulo, fecha, porcentaje)
+                val tarea = Tarea(null, titulo, fecha,porcentaje)
                 tareas.add(tarea)
             }
         }

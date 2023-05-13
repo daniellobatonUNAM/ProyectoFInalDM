@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         //Lista que llenará el RecyclerView
         val dataList = listOf(
 
-            Tarea(1, "Tarea 1","19-12-1998", 85),
-            Tarea(2, "Tarea 2", "19-12-1997", 84),
-            Tarea(3, "Tarea 3", "19-12-1996", 83),
+            Tarea(null, "Tarea 1","19-12-1998", 85),
+            Tarea(null, "Tarea 2", "19-12-1997", 84),
+            Tarea(null, "Tarea 3", "19-12-1996", 83),
 
         )
         //Se establece el adaptador
