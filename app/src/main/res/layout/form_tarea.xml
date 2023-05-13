@@ -16,7 +16,7 @@
         />
 
     <EditText
-        android:id="@+id/nombreTarea"
+        android:id="@+id/inputNombreTarea"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -41,7 +41,8 @@
         android:gravity="start|top"
         android:minLines="2"
         android:maxLines="7"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:id="@+id/inputDescripcion"/>
 
 
 
@@ -91,10 +92,10 @@
         >
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch1"
+            android:id="@+id/switchRecordatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             />
 
         <TextView
@@ -121,13 +122,13 @@
         >
 
         <RadioButton
-            android:id="@+id/radioButton1"
+            android:id="@+id/radioSi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cinco_antes" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/uno_antes" />
@@ -143,6 +144,7 @@
         android:layout_gravity="center"
         android:text="@string/guardar"
         android:padding="15dp"
+        android:id="@+id/btnAddTarea"
         />
 
 </LinearLayout>
