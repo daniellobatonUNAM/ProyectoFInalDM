@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:gravity="start|top"
-        android:minLines="3"
+        android:minLines="2"
         android:maxLines="7"
         android:layout_marginBottom="10dp"/>
 

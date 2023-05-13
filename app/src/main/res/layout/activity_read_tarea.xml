@@ -83,7 +83,8 @@
                 android:layout_width="150px"
                 android:layout_height="150px"
                 android:src="@mipmap/edit"
-                android:contentDescription="@string/editar" />
+                android:contentDescription="@string/editar"
+                android:id="@+id/editTarea"/>
 
             <TextView
                 android:layout_width="wrap_content"
