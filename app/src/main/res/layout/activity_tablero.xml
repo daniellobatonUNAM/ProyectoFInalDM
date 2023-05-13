@@ -17,8 +17,8 @@
         >
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@mipmap/back"
             android:id="@+id/btnBackBoard"
             android:layout_gravity="start"
