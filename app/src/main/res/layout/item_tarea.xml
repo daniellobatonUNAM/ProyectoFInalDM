@@ -10,7 +10,7 @@
     >
 
     <TextView
-        android:id="@+id/textViewTitle"
+        android:id="@+id/tituloItemTarea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Título"
@@ -33,12 +33,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="19-12-1998"
+            android:id="@+id/fechaFinalizacion"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="85%"
+            android:id="@+id/porcentajeCumplido"
             />
 
     </LinearLayout>
