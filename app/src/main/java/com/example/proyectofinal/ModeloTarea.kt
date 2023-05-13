@@ -77,4 +77,26 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         db.close()
     }
 
+    fun obtenerTodas(): MutableList<Tarea> {
+
+        val db = databaseHelper.readableDatabase
+
+        val tareas = mutableListOf<Tarea>()
+
+        db.query(TABLE_NAME, null, null, null, null, null, null)?.use { cursor ->
+            while (cursor.moveToNext()) {
+                val id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID))
+                val titulo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITULO))
+                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA))
+                val porcentaje = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PORCENTAJE))
+
+                val tarea = Tarea(id, titulo, fecha, porcentaje)
+                tareas.add(tarea)
+            }
+        }
+
+        return tareas
+
+    }
+
 }

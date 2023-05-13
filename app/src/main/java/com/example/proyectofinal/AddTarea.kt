@@ -87,16 +87,17 @@ class AddTarea : AppCompatActivity() {
 
             }
 
-
+            //Conexión
             conexion = BDSQLite(this)
             val modelo = ModeloTarea(conexion)
-
-
-            val idInsertado = modelo.insertarTarea(Tarea(null, "", "", 54))
+            //Inserción
+            val idInsertado = modelo.insertarTarea(Tarea(null, tituloTarea.text.toString(), fechaFin.text.toString(), 7))
 
             if (idInsertado != -1L) {
 
                 Log.e("Insertado", "Sí")
+
+                Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
 
             } else {
 
@@ -105,8 +106,6 @@ class AddTarea : AppCompatActivity() {
             }
 
             finish()
-
-            Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
 
         }
 

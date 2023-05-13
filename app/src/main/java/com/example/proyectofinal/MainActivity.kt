@@ -3,6 +3,7 @@ package com.example.proyectofinal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +13,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAdd: ImageButton
     private lateinit var btnBoard: ImageButton
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: AdaptadorTarea
+    private lateinit var listaBD: MutableList<Tarea>
+
+    private var conexion = BDSQLite(this)
+    private var modelo = ModeloTarea(conexion)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,29 +25,50 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
-        //Se establece la funcionalidadd e los botones de regresar
+        //Se establece la funcionalidadd de los botones para ingresar a otro Activity
         btnAdd = findViewById(R.id.btnAdd)
         btnBoard = findViewById(R.id.btnBoard)
         pasarAddTarea()
         pasarTablero()
 
-        //Llenado del RecyclerView
+        //Configuración del RecyclerView
         recyclerView = findViewById(R.id.recyclerTareasMain)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        //Lista que llenará el RecyclerView
-        val dataList = listOf(
+        //Conexión
+        modelo = ModeloTarea(conexion)
+        //Inserción
+        listaBD = modelo.obtenerTodas()
 
-            Tarea(null, "Tarea 1","19-12-1998", 85),
-            Tarea(null, "Tarea 2", "19-12-1997", 84),
-            Tarea(null, "Tarea 3", "19-12-1996", 83),
-
-        )
         //Se establece el adaptador
-        val adapter = AdaptadorTarea(dataList)
+        establecerAdaptador()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.d("Estado", "On Resume")
+
+        Log.d("Estado lista", "" + listaBD)
+        listaBD.clear()
+        Log.d("Estado lista After", "" + listaBD)
+
+        listaBD = modelo.obtenerTodas()
+
+        Log.d("Estado lista Final", "" + listaBD)
+
+
+        establecerAdaptador()
+    }
+
+    fun establecerAdaptador(){
+
+        adapter = AdaptadorTarea(listaBD)
         recyclerView.adapter = adapter
 
     }
+
 
     private fun pasarAddTarea(){
         btnAdd.setOnClickListener {
