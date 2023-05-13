@@ -1,0 +1,39 @@
+<resources>
+
+    <string name="app_name">ProyectoDM</string>
+
+    <!-- Vista Main -->
+    <string name="titulo_tarea">Tareas</string>
+    <string name="anadir_tarea">Añadir tarea</string>
+    <string name="ver_tablero">Ver tablero</string>
+
+    <!-- Formulario tarea -->
+    <string name="nombre_tarea">Ingresa un nombre para tu tarea</string>
+    <string name="descripcion_tarea">¿En qué consiste tu tarea?</string>
+    <string name="fecha_finalizacion">¿Para cuándo es tu tarea?</string>
+    <string name="fecha_inicio">¿Cuándo debería de empezar tu tarea?</string>
+    <string name="fecha_fin">¿Cuándo debería de finalizar tu tarea?</string>
+    <string name="desea_recordatorio">¿Deseas que te recordemos cuando se acerque la fecha límite 19-12-2323?</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
+    <string name="frecuencia_recordatorio">¿Cada cuándo deseas que te recordemos?</string>
+    <string name="cinco_antes">Cinco días antes de la fecha límite</string>
+    <string name="uno_antes">Un día antes de la fecha límite</string>
+    <string name="guardar">Guardar</string>
+
+    <!-- Tablero -->
+    <string name="titulo_tablero">Estado de las tareas</string>
+    <string name="pendientes">Pendientes</string>
+    <string name="en_curso">En curso</string>
+    <string name="terminadas">Terminadas</string>
+
+    <!-- Read Tarea -->
+    <string name="para">Para el </string>
+    <string name="estado">Estado: </string>
+    <string name="recordatorio">Recordatorio: </string>
+    <string name="editar">Editar tarea</string>
+    <string name="eliminar">Eliminar tarea: </string>
+    <string name="title_activity_add_tarea">AddTarea</string>
+
+
+</resources>
