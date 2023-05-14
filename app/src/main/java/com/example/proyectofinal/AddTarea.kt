@@ -3,6 +3,7 @@ package com.example.proyectofinal
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 
@@ -20,6 +21,9 @@ class AddTarea : AppCompatActivity() {
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioSi: RadioButton
     private lateinit var radioNo: RadioButton
+    private lateinit var seccionOpcional: LinearLayout
+    private lateinit var txtCambiante: TextView
+
 
     //Btn Añadir
     private lateinit var btnAdd: Button
@@ -45,6 +49,19 @@ class AddTarea : AppCompatActivity() {
         radioGroup = findViewById(R.id.radioRecordatorio)
         radioSi = findViewById(R.id.radioSi)
         radioNo = findViewById(R.id.radioNo)
+        txtCambiante = findViewById(R.id.txtCambiante)
+
+        //Sección opcional dependiendo del switch
+        seccionOpcional = findViewById(R.id.seccion_opcional)
+        switchRecordatorio.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                seccionOpcional.visibility = View.VISIBLE
+                txtCambiante.text = "Sí"
+            } else {
+                seccionOpcional.visibility = View.INVISIBLE
+                txtCambiante.text = "No"
+            }
+        }
 
         //Se inicializa el botón de Añadir
         btnAdd = findViewById(R.id.btnAddTarea)

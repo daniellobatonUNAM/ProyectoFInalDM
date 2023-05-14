@@ -101,39 +101,51 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/si"/>
+            android:text="@string/no"
+            android:id="@+id/txtCambiante"/>
 
     </LinearLayout>
 
 
 
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/frecuencia_recordatorio"
-        />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radioRecordatorio"
-        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:id="@+id/seccion_opcional"
+        android:visibility="invisible"
         >
 
-        <RadioButton
-            android:id="@+id/radioSi"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cinco_antes" />
+            android:text="@string/frecuencia_recordatorio"
+            />
 
-        <RadioButton
-            android:id="@+id/radioNo"
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/uno_antes" />
+            android:id="@+id/radioRecordatorio"
+            android:layout_marginBottom="10dp"
+            >
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/radioSi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cinco_antes" />
+
+            <RadioButton
+                android:id="@+id/radioNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/uno_antes" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
 
 
 

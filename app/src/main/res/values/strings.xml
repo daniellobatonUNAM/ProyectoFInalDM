@@ -13,7 +13,7 @@
     <string name="fecha_finalizacion">¿Para cuándo es tu tarea?</string>
     <string name="fecha_inicio">¿Cuándo debería de empezar tu tarea?</string>
     <string name="fecha_fin">¿Cuándo debería de finalizar tu tarea?</string>
-    <string name="desea_recordatorio">¿Deseas que te recordemos cuando se acerque la fecha límite 19-12-2323?</string>
+    <string name="desea_recordatorio">¿Deseas que te recordemos cuando se acerque la fecha límite?</string>
     <string name="si">Sí</string>
     <string name="no">No</string>
     <string name="frecuencia_recordatorio">¿Cada cuándo deseas que te recordemos?</string>
