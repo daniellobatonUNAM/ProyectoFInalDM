@@ -46,18 +46,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+
         super.onResume()
 
-        Log.d("Estado", "On Resume")
-
-        Log.d("Estado lista", "" + listaBD)
         listaBD.clear()
-        Log.d("Estado lista After", "" + listaBD)
 
         listaBD = modelo.obtenerTodas()
-
-        Log.d("Estado lista Final", "" + listaBD)
-
 
         establecerAdaptador()
     }
@@ -65,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     fun establecerAdaptador(){
 
         adapter = AdaptadorTarea(listaBD)
+        
         recyclerView.adapter = adapter
 
     }

@@ -63,35 +63,24 @@ class AddTarea : AppCompatActivity() {
 
         btnAdd.setOnClickListener(){
 
-            Log.e("Nombre de la tarea: ", tituloTarea.text.toString())
-            Log.e("Descripcion de la tarea: ", descripcionTarea.text.toString())
-            Log.e("Fecha fin de la tarea: ", fechaFin.text.toString())
-            Log.e("Fecha inicio de la tarea: ", fechaInicio.text.toString())
-            if(switchRecordatorio.isChecked){
-
-                Log.e("¿Recordatorio de la tarea? ", "Sí")
-
-            }else{
-
-                Log.e("¿Recordatorio de la tarea? ", "No")
-
-            }
-
-            if(radioGroup.checkedRadioButtonId == R.id.radioSi){
-
-                Log.e("Radio de la tarea: ", "Sí")
-
-            }else{
-
-                Log.e("Radio de la tarea: ", "No")
-
-            }
+            val titulo = tituloTarea.text.toString()
+            val descripcion = descripcionTarea.text.toString()
+            val fechaTermino = fechaFin.text.toString()
+            val fechaIniciacion = fechaInicio.text.toString()
+            val recordatorio = switchRecordatorio.isChecked
+            val radioGroup: RadioGroup = findViewById(R.id.radioRecordatorio)
+            val radioButtonId = radioGroup.checkedRadioButtonId
+            val radioButton: RadioButton = findViewById(radioButtonId)
+            val frecuencia = radioButton.text.toString()
 
             //Conexión
             conexion = BDSQLite(this)
             val modelo = ModeloTarea(conexion)
-            //Inserción
-            val idInsertado = modelo.insertarTarea(Tarea(null, tituloTarea.text.toString(), fechaFin.text.toString(), 7))
+
+            //Inserción de una nueva Tarea
+            val idInsertado = modelo.insertarTarea(Tarea(null, titulo,
+                descripcion, fechaTermino, fechaIniciacion,
+                recordatorio, frecuencia,null))
 
             if (idInsertado != -1L) {
 

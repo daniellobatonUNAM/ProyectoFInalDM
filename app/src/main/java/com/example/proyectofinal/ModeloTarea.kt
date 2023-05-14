@@ -5,13 +5,17 @@ import android.content.ContentValues
 class ModeloTarea(private val databaseHelper: BDSQLite)  {
 
     companion object {
-        private const val DATABASE_NAME = "tareas.db"
+        private const val DATABASE_NAME = "tarea.DB"
         private const val DATABASE_VERSION = 1
 
         private const val TABLE_NAME = "tareas"
         private const val COLUMN_ID = "id"
         private const val COLUMN_TITULO = "titulo"
-        private const val COLUMN_FECHA = "fecha"
+        private const val COLUMN_DESCRIPCION = "descripcion"
+        private const val COLUMN_FECHA_FIN = "fecha_fin"
+        private const val COLUMN_FECHA_INICIO = "fecha_inicio"
+        private const val COLUMN_RECORDATORIO = "recordatorio"
+        private const val COLUMN_FRECUENCIA = "frecuencia"
         private const val COLUMN_PORCENTAJE = "porcentaje"
     }
 
@@ -20,7 +24,11 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         val db = databaseHelper.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_TITULO, tarea.titulo)
-            put(COLUMN_FECHA, tarea.fechaFinalizacion)
+            put(COLUMN_DESCRIPCION, tarea.descripcion)
+            put(COLUMN_FECHA_FIN, tarea.fechaFinalizacion)
+            put(COLUMN_FECHA_INICIO, tarea.fechaInicio)
+            put(COLUMN_RECORDATORIO, tarea.deseaRecoratorio)
+            put(COLUMN_FRECUENCIA, tarea.frecuenciaRecordatorio)
             put(COLUMN_PORCENTAJE, tarea.porcentaje)
         }
         return db.insert(TABLE_NAME, null, contentValues)
@@ -29,7 +37,9 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
 
     fun obtenerTareas(): List<Tarea> {
         val db = databaseHelper.readableDatabase
-        val projection = arrayOf(COLUMN_ID, COLUMN_TITULO, COLUMN_FECHA, COLUMN_PORCENTAJE)
+        val projection = arrayOf(COLUMN_ID, COLUMN_TITULO, COLUMN_DESCRIPCION,
+            COLUMN_FECHA_FIN, COLUMN_FECHA_INICIO, COLUMN_RECORDATORIO,
+            COLUMN_FRECUENCIA, COLUMN_PORCENTAJE)
         val cursor = db.query(TABLE_NAME, projection, null, null, null, null, null)
 
         val tareas = mutableListOf<Tarea>()
@@ -37,10 +47,16 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
             while (moveToNext()) {
                 val id = getLong(getColumnIndexOrThrow(COLUMN_ID))
                 val titulo = getString(getColumnIndexOrThrow(COLUMN_TITULO))
-                val fecha = getString(getColumnIndexOrThrow(COLUMN_FECHA))
+                val descripcion = getString(getColumnIndexOrThrow(COLUMN_DESCRIPCION))
+                val fechaFin = getString(getColumnIndexOrThrow(COLUMN_FECHA_FIN))
+                val fechaInicio = getString(getColumnIndexOrThrow(COLUMN_FECHA_INICIO))
+                val recordatorioIndex = cursor.getColumnIndexOrThrow(COLUMN_RECORDATORIO)
+                val recordatorioInt = cursor.getInt(recordatorioIndex)
+                val recordatorio = recordatorioInt != 0
+                val frecuencia = getString(getColumnIndexOrThrow(COLUMN_FRECUENCIA))
                 val porcentaje = getInt(getColumnIndexOrThrow(COLUMN_PORCENTAJE))
 
-                val tarea = Tarea(null, titulo, fecha,porcentaje)
+                val tarea = Tarea(null, titulo, descripcion, fechaFin, fechaInicio, recordatorio, frecuencia,porcentaje)
                 tareas.add(tarea)
             }
         }
@@ -56,7 +72,11 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         val db = databaseHelper.writableDatabase
         val contentValues = ContentValues().apply {
             put(COLUMN_TITULO, tarea.titulo)
-            put(COLUMN_FECHA, tarea.fechaFinalizacion)
+            put(COLUMN_DESCRIPCION, tarea.descripcion)
+            put(COLUMN_FECHA_FIN, tarea.fechaFinalizacion)
+            put(COLUMN_FECHA_INICIO, tarea.fechaInicio)
+            put(COLUMN_RECORDATORIO, tarea.deseaRecoratorio)
+            put(COLUMN_FRECUENCIA, tarea.frecuenciaRecordatorio)
             put(COLUMN_PORCENTAJE, tarea.porcentaje)
         }
 
@@ -87,10 +107,16 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
             while (cursor.moveToNext()) {
                 val id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_ID))
                 val titulo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITULO))
-                val fecha = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA))
+                val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPCION))
+                val fechaFin = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA_FIN))
+                val fechaInicio = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA_INICIO))
+                val recordatorioIndex = cursor.getColumnIndexOrThrow(COLUMN_RECORDATORIO)
+                val recordatorioInt = cursor.getInt(recordatorioIndex)
+                val recordatorio = recordatorioInt != 0
+                val frecuencia = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FRECUENCIA))
                 val porcentaje = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PORCENTAJE))
 
-                val tarea = Tarea(id, titulo, fecha, porcentaje)
+                val tarea = Tarea(null, titulo, descripcion, fechaFin, fechaInicio, recordatorio, frecuencia,porcentaje)
                 tareas.add(tarea)
             }
         }
