@@ -28,8 +28,10 @@ class AddTarea : AppCompatActivity() {
     //Btn Añadir
     private lateinit var btnAdd: Button
 
-
+    //Conexión con la base de datos
     private lateinit var conexion: BDSQLite
+
+    private var datosCompletos: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,25 +53,31 @@ class AddTarea : AppCompatActivity() {
         radioNo = findViewById(R.id.radioNo)
         txtCambiante = findViewById(R.id.txtCambiante)
 
+
         //Sección opcional dependiendo del switch
-        var datosCompletos = false
         seccionOpcional = findViewById(R.id.seccion_opcional)
         switchRecordatorio.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 seccionOpcional.visibility = View.VISIBLE
                 txtCambiante.text = "Sí"
                 datosCompletos = true
+
             } else {
                 seccionOpcional.visibility = View.INVISIBLE
                 txtCambiante.text = "No"
                 datosCompletos = false
+
             }
         }
 
         //Se inicializa el botón de Añadir
         btnAdd = findViewById(R.id.btnAddTarea)
 
-        agregarTarea(datosCompletos)
+        btnAdd.setOnClickListener() {
+
+            agregarTarea(datosCompletos)
+
+        }
 
     }
 
@@ -79,69 +87,64 @@ class AddTarea : AppCompatActivity() {
         }
     }
 
-    fun agregarTarea(datosCompletos: Boolean){
+    fun agregarTarea(datosCompletos_f: Boolean){
 
-        Log.e("Datos completos: ", "$datosCompletos")
+        Log.e("Datos completos: ", "$datosCompletos_f")
 
-        btnAdd.setOnClickListener(){
 
-            val titulo = tituloTarea.text.toString()
-            val descripcion = descripcionTarea.text.toString()
-            val fechaTermino = fechaFin.text.toString()
-            val fechaIniciacion = fechaInicio.text.toString()
+        val titulo = tituloTarea.text.toString()
+        val descripcion = descripcionTarea.text.toString()
+        val fechaTermino = fechaFin.text.toString()
+        val fechaIniciacion = fechaInicio.text.toString()
 
-            val recordatorio: Boolean;
+        val recordatorio: Boolean;
 
-            var frecuencia: String
+        var frecuencia: String
 
-            if(!datosCompletos){
+        if(datosCompletos_f){
 
-                recordatorio = false
-                frecuencia = ""
+            val radioGroup: RadioGroup = findViewById(R.id.radioRecordatorio)
 
-            }else{
+            val radioButtonId = radioGroup.checkedRadioButtonId
 
-                val radioGroup: RadioGroup = findViewById(R.id.radioRecordatorio)
+            val radioButton: RadioButton = findViewById(radioButtonId)
 
-                val radioButtonId = radioGroup.checkedRadioButtonId
+            recordatorio = switchRecordatorio.isChecked
+            frecuencia = radioButton.text.toString()
 
-                val radioButton: RadioButton = findViewById(radioButtonId)
+        }else{
 
-                recordatorio = switchRecordatorio.isChecked
-                frecuencia = radioButton.text.toString()
-
-            }
-
-            Log.e("Prefacio", "Justo antes de la inserción")
-
-            Log.e("Datos", "titulo: $titulo, Descripción: $descripcion, Término: $fechaTermino, Inicio: $fechaIniciacion, Recordatorio: $recordatorio, Frecuencia: $frecuencia")
-
-            //Conexión
-            conexion = BDSQLite(this)
-            val modelo = ModeloTarea(conexion)
-
-            //Inserción de una nueva Tarea
-            val idInsertado = modelo.insertarTarea(Tarea(null, titulo,
-                descripcion, fechaTermino, fechaIniciacion,
-                recordatorio, frecuencia,null))
-
-            if (idInsertado != -1L) {
-
-                Log.e("Insertado", "Sí")
-
-                Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
-
-            } else {
-
-                Log.e("Insertado", "No")
-
-                Toast.makeText(this, "Falló el registro", Toast.LENGTH_LONG).show()
-
-            }
-
-            finish()
+            recordatorio = false
+            frecuencia = ""
 
         }
+
+        Log.e("Prefacio", "Justo antes de la inserción")
+
+        Log.e("Datos", "titulo: $titulo, Descripción: $descripcion, Término: $fechaTermino, Inicio: $fechaIniciacion, Recordatorio: $recordatorio, Frecuencia: $frecuencia")
+
+        //Conexión
+        conexion = BDSQLite(this)
+        val modelo = ModeloTarea(conexion)
+
+        //Inserción de una nueva Tarea
+        val idInsertado = modelo.insertarTarea(Tarea(null, titulo,
+            descripcion, fechaTermino, fechaIniciacion,
+            recordatorio, frecuencia,null))
+
+        if (idInsertado != -1L) {
+
+            Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
+
+        } else {
+
+            Toast.makeText(this, "Falló el registro", Toast.LENGTH_LONG).show()
+
+        }
+
+        finish()
+
+
 
     }
 }

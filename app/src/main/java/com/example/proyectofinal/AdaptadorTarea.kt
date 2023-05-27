@@ -14,8 +14,6 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
         val textViewFecha: TextView = view.findViewById(R.id.fechaFinalizacion)
         val textViewPorcentaje: TextView = view.findViewById(R.id.porcentajeCumplido)
 
-
-
         fun bind(item: Tarea){}
     }
 
