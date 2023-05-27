@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -59,11 +60,16 @@ class MainActivity : AppCompatActivity() {
     fun establecerAdaptador(){
 
         adapter = AdaptadorTarea(listaBD)
+        //Listener para cada item
+        adapter.setItemClickListener(object : AdaptadorTarea.ItemClickListener {
+            override fun onItemClick(tarea: Tarea) {
+                Toast.makeText(this@MainActivity, "Tap en " + tarea.titulo, Toast.LENGTH_SHORT).show()
+            }
+        })
         
         recyclerView.adapter = adapter
 
     }
-
 
     private fun pasarAddTarea(){
         btnAdd.setOnClickListener {

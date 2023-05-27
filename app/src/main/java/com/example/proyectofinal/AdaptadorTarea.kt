@@ -8,11 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<AdaptadorTarea.ViewHolder>() {
 
+    private var itemClickListener: ItemClickListener? = null
+    fun setItemClickListener(listener: ItemClickListener) {
+        itemClickListener = listener
+    }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val textViewTitulo: TextView = view.findViewById(R.id.tituloItemTarea)
         val textViewFecha: TextView = view.findViewById(R.id.fechaFinalizacion)
         val textViewPorcentaje: TextView = view.findViewById(R.id.porcentajeCumplido)
+
+
 
         fun bind(item: Tarea){}
     }
@@ -28,10 +34,18 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
         holder.textViewFecha.text = item.fechaFinalizacion
         holder.textViewPorcentaje.text = item.porcentaje.toString() + "% completada"
         holder.bind(item)
+
+        holder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int {
         return dataList.size
+    }
+
+    interface ItemClickListener {
+        fun onItemClick(tarea: Tarea)
     }
 
 }
