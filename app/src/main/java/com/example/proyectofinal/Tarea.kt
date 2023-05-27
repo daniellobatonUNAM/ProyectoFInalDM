@@ -6,7 +6,7 @@ data class Tarea(
     val descripcion: String,
     val fechaFinalizacion: String,
     val fechaInicio: String,
-    val deseaRecoratorio: Boolean,
+    val deseaRecoratorio: Boolean?,
     val frecuenciaRecordatorio: String?,
     val porcentaje: Int?
 )

@@ -52,21 +52,24 @@ class AddTarea : AppCompatActivity() {
         txtCambiante = findViewById(R.id.txtCambiante)
 
         //Sección opcional dependiendo del switch
+        var datosCompletos = false
         seccionOpcional = findViewById(R.id.seccion_opcional)
         switchRecordatorio.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 seccionOpcional.visibility = View.VISIBLE
                 txtCambiante.text = "Sí"
+                datosCompletos = true
             } else {
                 seccionOpcional.visibility = View.INVISIBLE
                 txtCambiante.text = "No"
+                datosCompletos = false
             }
         }
 
         //Se inicializa el botón de Añadir
         btnAdd = findViewById(R.id.btnAddTarea)
 
-        agregarTarea()
+        agregarTarea(datosCompletos)
 
     }
 
@@ -76,7 +79,9 @@ class AddTarea : AppCompatActivity() {
         }
     }
 
-    fun agregarTarea(){
+    fun agregarTarea(datosCompletos: Boolean){
+
+        Log.e("Datos completos: ", "$datosCompletos")
 
         btnAdd.setOnClickListener(){
 
@@ -84,11 +89,32 @@ class AddTarea : AppCompatActivity() {
             val descripcion = descripcionTarea.text.toString()
             val fechaTermino = fechaFin.text.toString()
             val fechaIniciacion = fechaInicio.text.toString()
-            val recordatorio = switchRecordatorio.isChecked
-            val radioGroup: RadioGroup = findViewById(R.id.radioRecordatorio)
-            val radioButtonId = radioGroup.checkedRadioButtonId
-            val radioButton: RadioButton = findViewById(radioButtonId)
-            val frecuencia = radioButton.text.toString()
+
+            val recordatorio: Boolean;
+
+            var frecuencia: String
+
+            if(!datosCompletos){
+
+                recordatorio = false
+                frecuencia = ""
+
+            }else{
+
+                val radioGroup: RadioGroup = findViewById(R.id.radioRecordatorio)
+
+                val radioButtonId = radioGroup.checkedRadioButtonId
+
+                val radioButton: RadioButton = findViewById(radioButtonId)
+
+                recordatorio = switchRecordatorio.isChecked
+                frecuencia = radioButton.text.toString()
+
+            }
+
+            Log.e("Prefacio", "Justo antes de la inserción")
+
+            Log.e("Datos", "titulo: $titulo, Descripción: $descripcion, Término: $fechaTermino, Inicio: $fechaIniciacion, Recordatorio: $recordatorio, Frecuencia: $frecuencia")
 
             //Conexión
             conexion = BDSQLite(this)
@@ -108,6 +134,8 @@ class AddTarea : AppCompatActivity() {
             } else {
 
                 Log.e("Insertado", "No")
+
+                Toast.makeText(this, "Falló el registro", Toast.LENGTH_LONG).show()
 
             }
 
