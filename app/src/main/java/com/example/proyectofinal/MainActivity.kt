@@ -1,11 +1,11 @@
 package com.example.proyectofinal
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.provider.SyncStateContract
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         //Listener para cada item
         adapter.setItemClickListener(object : AdaptadorTarea.ItemClickListener {
             override fun onItemClick(tarea: Tarea) {
-                Toast.makeText(this@MainActivity, "Tap en " + tarea.titulo, Toast.LENGTH_SHORT).show()
+                pasarReadTarea(tarea)
             }
         })
         
@@ -83,6 +83,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Tablero::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun pasarReadTarea(tarea: Tarea){
+        val intent = Intent(this, ReadTarea::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable("extra_tarea", tarea)
+        intent.putExtras(bundle)
+
+        startActivity(intent)
+
     }
 
 }
