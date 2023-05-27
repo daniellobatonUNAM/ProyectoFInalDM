@@ -26,7 +26,7 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
         val item: Tarea = dataList[position]
         holder.textViewTitulo.text = item.titulo
         holder.textViewFecha.text = item.fechaFinalizacion
-        holder.textViewPorcentaje.text = item.porcentaje.toString()
+        holder.textViewPorcentaje.text = item.porcentaje.toString() + "% completada"
         holder.bind(item)
     }
 

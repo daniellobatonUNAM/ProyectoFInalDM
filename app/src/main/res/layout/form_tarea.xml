@@ -53,12 +53,30 @@
         android:text="@string/fecha_fin"
         />
 
-    <EditText
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputFechaFin"
-        android:layout_marginBottom="10dp"
-        />
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/calendar"
+            android:id="@+id/btnCalendarFin"
+            android:layout_gravity="start"
+            android:layout_marginRight="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/textoFechaFin"
+            />
+
+    </LinearLayout>
 
 
 
@@ -69,14 +87,29 @@
         android:text="@string/fecha_inicio"
         />
 
-    <EditText
-        android:layout_width="300dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inputFechaInicio"
-        android:layout_marginBottom="10dp"
-        />
+        android:orientation="horizontal"
+        android:gravity="center">
 
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/calendar"
+            android:id="@+id/btnCalendarInicio"
+            android:layout_gravity="start"
+            android:layout_marginRight="10dp"
+            />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/textoFechaInicio"
+            />
+
+    </LinearLayout>
 
 
     <TextView
