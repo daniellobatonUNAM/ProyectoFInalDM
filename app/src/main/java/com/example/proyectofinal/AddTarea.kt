@@ -100,13 +100,10 @@ class AddTarea : AppCompatActivity() {
 
     fun agregarTarea(datosCompletos_f: Boolean){
 
-        Log.e("Datos completos: ", "$datosCompletos_f")
-
-
-        val titulo = tituloTarea.text.toString()
-        val descripcion = descripcionTarea.text.toString()
-        val fechaTermino = fechaFin
-        val fechaIniciacion = fechaInicio
+        val titulo = tituloTarea.text.toString().trim()
+        val descripcion = descripcionTarea.text.toString().trim()
+        val fechaTermino = fechaFin.trim()
+        val fechaIniciacion = fechaInicio.trim()
 
         val recordatorio: Boolean;
 
@@ -121,7 +118,7 @@ class AddTarea : AppCompatActivity() {
             val radioButton: RadioButton = findViewById(radioButtonId)
 
             recordatorio = switchRecordatorio.isChecked
-            frecuencia = radioButton.text.toString()
+            frecuencia = radioButton.text.toString().trim()
 
         }else{
 
