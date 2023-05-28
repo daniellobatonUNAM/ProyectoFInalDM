@@ -2,8 +2,11 @@ package com.example.proyectofinal
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -15,6 +18,9 @@ class ReadTarea : AppCompatActivity() {
     private lateinit var btnBack: ImageButton
     private lateinit var btnEdit: ImageButton
     private lateinit var btnDelete: ImageButton
+    private lateinit var btnIniciar: ImageButton
+
+    private lateinit var layoutIniciar: LinearLayout
 
     private lateinit var conexion: BDSQLite
 
@@ -47,11 +53,11 @@ class ReadTarea : AppCompatActivity() {
         fechaFinRead.text = getString(R.string.para) + ": " + tarea.fechaFinalizacion
         progressBar.progress = tarea.porcentaje!!
         porcentajeRead.text = tarea.porcentaje.toString() + "% completado"
-        if(tarea.estado == 0){
-            estadoRead.text = getString(R.string.estado) + " No iniciado"
-        }
         descripcionRead.text = tarea.descripcion
         recordatorio.text = getString(R.string.recordatorio) + " " + tarea.frecuenciaRecordatorio
+
+        btnBack = findViewById(R.id.backRead)
+        backMain()
 
         btnEdit = findViewById(R.id.editTarea)
         editTarea(tarea)
@@ -59,8 +65,24 @@ class ReadTarea : AppCompatActivity() {
         btnDelete = findViewById(R.id.deleteTarea)
         deleteTarea(tarea)
 
+        layoutIniciar = findViewById(R.id.layoutIniciar)
+        btnIniciar = findViewById(R.id.btnIniciarTarea)
+        iniciarTarea(tarea)
+
+        if(tarea.estado == 0){
+            estadoRead.text = getString(R.string.estado) + " No iniciado"
+        }else if(tarea.estado == 1){
+            estadoRead.text = getString(R.string.estado) + "En progreso"
+            layoutIniciar.visibility = View.INVISIBLE
+        }
+
     }
 
+    fun backMain(){
+        btnBack.setOnClickListener(){
+            finish()
+        }
+    }
 
     fun editTarea(tarea: Tarea){
 
@@ -116,6 +138,34 @@ class ReadTarea : AppCompatActivity() {
             dialog.show()
 
         }
+    }
+
+    fun iniciarTarea(tarea: Tarea){
+
+        btnIniciar.setOnClickListener(){
+
+            conexion = BDSQLite(this)
+
+            val modelo = ModeloTarea(conexion)
+
+            val actualizacionExitosa = modelo.iniciarTarea(tarea)
+
+            if (actualizacionExitosa) {
+
+                estadoRead.text = getString(R.string.estado) + "En progreso"
+                layoutIniciar.visibility = View.INVISIBLE
+
+                Toast.makeText(this, "La tarea ${tarea.titulo} ha iniciado. Ahora puedes ir modificando su progreso desde Editar tarea", Toast.LENGTH_LONG).show()
+
+            } else {
+
+                Toast.makeText(this, "Error al iniciar tarea", Toast.LENGTH_LONG).show()
+
+            }
+
+        }
+
+
     }
 
 }

@@ -133,4 +133,29 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
 
     }
 
+    fun iniciarTarea(tarea: Tarea): Boolean{
+
+        /*
+            0: No Iniciado
+            1: En progreso
+            2: Terminada
+         */
+
+        val idK: String = COLUMN_ID
+
+        val db = databaseHelper.writableDatabase
+        val contentValues = ContentValues().apply {
+            put(COLUMN_ESTADO, 1)
+        }
+
+        val selection = "$COLUMN_ID = ?"
+        val selectionArgs = arrayOf(tarea.id.toString())
+
+        val rowsAffected = db.update(TABLE_NAME, contentValues, selection, selectionArgs)
+        db.close()
+
+        return rowsAffected > 0
+
+    }
+
 }

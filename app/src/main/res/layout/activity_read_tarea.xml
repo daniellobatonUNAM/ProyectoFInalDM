@@ -6,9 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ReadTarea"
     android:orientation="vertical"
-    android:paddingVertical="50dp"
+    android:paddingVertical="30dp"
     android:paddingHorizontal="35dp"
-    android:layout_marginTop="80dp">
+    android:id="@+id/layoutRead">
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/back"
+        android:id="@+id/backRead"
+        android:layout_marginBottom="25dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,13 +28,12 @@
         />
 
     <TextView
+        android:id="@+id/txtParaElRead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:id="@+id/txtParaElRead"
-        />
+        android:text="" />
 
     <ProgressBar
         android:id="@+id/progressBarProgreso"
@@ -35,19 +41,17 @@
         android:layout_height="22dp"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:max="100"
-        android:progress="85"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         />
 
     <TextView
+        android:id="@+id/txtPorcentajeRead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:id="@+id/txtPorcentajeRead"
-        />
+        android:text="" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,7 +72,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="30dp"
         android:id="@+id/recordatorioRead"
         />
 
@@ -77,6 +81,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
         >
 
         <LinearLayout
@@ -128,6 +133,32 @@
 
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="15dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/layoutIniciar"
+        >
+
+        <ImageButton
+            android:layout_width="150px"
+            android:layout_height="150px"
+            android:src="@mipmap/play"
+            android:id="@+id/btnIniciarTarea"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/iniciar"
+            android:textSize="15sp"
+            />
+
 
     </LinearLayout>
 

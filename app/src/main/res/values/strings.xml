@@ -32,7 +32,8 @@
     <string name="estado">Estado: </string>
     <string name="recordatorio">Recordatorio: </string>
     <string name="editar">Editar tarea</string>
-    <string name="eliminar">Eliminar tarea: </string>
+    <string name="eliminar">Eliminar tarea</string>
+    <string name="iniciar">Iniciar tarea</string>
     <string name="title_activity_add_tarea">AddTarea</string>
 
 
