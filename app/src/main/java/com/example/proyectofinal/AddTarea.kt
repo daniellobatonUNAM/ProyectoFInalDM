@@ -127,10 +127,6 @@ class AddTarea : AppCompatActivity() {
 
         }
 
-        Log.e("Prefacio", "Justo antes de la inserción")
-
-        Log.e("Datos", "titulo: $titulo, Descripción: $descripcion, Término: $fechaTermino, Inicio: $fechaIniciacion, Recordatorio: $recordatorio, Frecuencia: $frecuencia")
-
         //Conexión
         conexion = BDSQLite(this)
         val modelo = ModeloTarea(conexion)
@@ -138,7 +134,7 @@ class AddTarea : AppCompatActivity() {
         //Inserción de una nueva Tarea
         val idInsertado = modelo.insertarTarea(Tarea(null, titulo,
             descripcion, fechaTermino, fechaIniciacion,
-            recordatorio, frecuencia,null))
+            recordatorio, null, frecuencia,null))
 
         if (idInsertado != -1L) {
 

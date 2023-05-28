@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,8 +21,11 @@ class ReadTarea : AppCompatActivity() {
 
     private lateinit var tituloRead: TextView
     private lateinit var fechaFinRead: TextView
+    private lateinit var progressBar: ProgressBar
     private lateinit var porcentajeRead: TextView
+    private lateinit var estadoRead: TextView
     private lateinit var descripcionRead: TextView
+    private lateinit var recordatorio: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,29 +37,44 @@ class ReadTarea : AppCompatActivity() {
 
         tituloRead = findViewById(R.id.txtTituloRead)
         fechaFinRead = findViewById(R.id.txtParaElRead)
+        progressBar = findViewById(R.id.progressBarProgreso)
         porcentajeRead = findViewById(R.id.txtPorcentajeRead)
+        estadoRead = findViewById(R.id.estadoRead)
         descripcionRead = findViewById(R.id.txtDescripcionRead)
+        recordatorio = findViewById(R.id.recordatorioRead)
 
         tituloRead.text = tarea.titulo
-        fechaFinRead.text = tarea.fechaFinalizacion
-        porcentajeRead.text = tarea.porcentaje.toString()
+        fechaFinRead.text = getString(R.string.para) + ": " + tarea.fechaFinalizacion
+        progressBar.progress = tarea.porcentaje!!
+        porcentajeRead.text = tarea.porcentaje.toString() + "% completado"
+        if(tarea.estado == 0){
+            estadoRead.text = getString(R.string.estado) + " No iniciado"
+        }
         descripcionRead.text = tarea.descripcion
+        recordatorio.text = getString(R.string.recordatorio) + " " + tarea.frecuenciaRecordatorio
 
         btnEdit = findViewById(R.id.editTarea)
-        editTarea()
+        editTarea(tarea)
 
         btnDelete = findViewById(R.id.deleteTarea)
-
-        Log.e("id Tarea", tarea.id.toString())
         deleteTarea(tarea)
+
     }
 
 
-    fun editTarea(){
+    fun editTarea(tarea: Tarea){
+
         btnEdit.setOnClickListener(){
+
             val intent = Intent(this, UpdateTarea::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable("extra_update", tarea)
+            intent.putExtras(bundle)
+
             startActivity(intent)
         }
+
+
     }
 
     fun deleteTarea(tarea: Tarea){

@@ -15,6 +15,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         private const val COLUMN_FECHA_FIN = "fecha_fin"
         private const val COLUMN_FECHA_INICIO = "fecha_inicio"
         private const val COLUMN_RECORDATORIO = "recordatorio"
+        private const val COLUMN_ESTADO = "estado"
         private const val COLUMN_FRECUENCIA = "frecuencia"
         private const val COLUMN_PORCENTAJE = "porcentaje"
     }
@@ -28,6 +29,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
             put(COLUMN_FECHA_FIN, tarea.fechaFinalizacion)
             put(COLUMN_FECHA_INICIO, tarea.fechaInicio)
             put(COLUMN_RECORDATORIO, tarea.deseaRecoratorio)
+            put(COLUMN_ESTADO, tarea.estado)
             put(COLUMN_FRECUENCIA, tarea.frecuenciaRecordatorio)
             put(COLUMN_PORCENTAJE, tarea.porcentaje)
         }
@@ -38,7 +40,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
     fun obtenerTareas(): List<Tarea> {
         val db = databaseHelper.readableDatabase
         val projection = arrayOf(COLUMN_ID, COLUMN_TITULO, COLUMN_DESCRIPCION,
-            COLUMN_FECHA_FIN, COLUMN_FECHA_INICIO, COLUMN_RECORDATORIO,
+            COLUMN_FECHA_FIN, COLUMN_FECHA_INICIO, COLUMN_RECORDATORIO, COLUMN_ESTADO,
             COLUMN_FRECUENCIA, COLUMN_PORCENTAJE)
         val cursor = db.query(TABLE_NAME, projection, null, null, null, null, null)
 
@@ -53,10 +55,11 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
                 val recordatorioIndex = cursor.getColumnIndexOrThrow(COLUMN_RECORDATORIO)
                 val recordatorioInt = cursor.getInt(recordatorioIndex)
                 val recordatorio = recordatorioInt != 0
+                val estado = getInt(getColumnIndexOrThrow(COLUMN_ESTADO))
                 val frecuencia = getString(getColumnIndexOrThrow(COLUMN_FRECUENCIA))
                 val porcentaje = getInt(getColumnIndexOrThrow(COLUMN_PORCENTAJE))
 
-                val tarea = Tarea(null, titulo, descripcion, fechaFin, fechaInicio, recordatorio, frecuencia,porcentaje)
+                val tarea = Tarea(null, titulo, descripcion, fechaFin, fechaInicio, recordatorio, estado, frecuencia,porcentaje)
                 tareas.add(tarea)
             }
         }
@@ -76,6 +79,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
             put(COLUMN_FECHA_FIN, tarea.fechaFinalizacion)
             put(COLUMN_FECHA_INICIO, tarea.fechaInicio)
             put(COLUMN_RECORDATORIO, tarea.deseaRecoratorio)
+            put(COLUMN_ESTADO, tarea.estado)
             put(COLUMN_FRECUENCIA, tarea.frecuenciaRecordatorio)
             put(COLUMN_PORCENTAJE, tarea.porcentaje)
         }
@@ -116,10 +120,11 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
                 val recordatorioIndex = cursor.getColumnIndexOrThrow(COLUMN_RECORDATORIO)
                 val recordatorioInt = cursor.getInt(recordatorioIndex)
                 val recordatorio = recordatorioInt != 0
+                val estado = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ESTADO))
                 val frecuencia = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FRECUENCIA))
                 val porcentaje = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PORCENTAJE))
 
-                val tarea = Tarea(id, titulo, descripcion, fechaFin, fechaInicio, recordatorio, frecuencia,porcentaje)
+                val tarea = Tarea(id, titulo, descripcion, fechaFin, fechaInicio, recordatorio, estado, frecuencia,porcentaje)
                 tareas.add(tarea)
             }
         }

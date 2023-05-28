@@ -10,6 +10,7 @@ data class Tarea (
     val fechaFinalizacion: String,
     val fechaInicio: String,
     val deseaRecoratorio: Boolean?,
+    val estado: Int?,
     val frecuenciaRecordatorio: String?,
     val porcentaje: Int?
 ) : Parcelable {
@@ -20,6 +21,7 @@ data class Tarea (
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int
     )
@@ -31,6 +33,7 @@ data class Tarea (
         parcel.writeString(fechaFinalizacion)
         parcel.writeString(fechaInicio)
         parcel.writeValue(deseaRecoratorio)
+        parcel.writeValue(estado)
         parcel.writeString(frecuenciaRecordatorio)
         parcel.writeValue(porcentaje)
     }

@@ -41,16 +41,6 @@ class MainActivity : AppCompatActivity() {
         //Inserción
         listaBD = modelo.obtenerTodas()
 
-        for (elemento in listaBD) {
-
-            //val mensaje = "Id: ${elemento.id}, Título: ${elemento.titulo}, Descripción: ${elemento.descripcion}"
-
-            //Log.e("Elemento", mensaje)
-
-            println(elemento)
-
-        }
-
         //Se establece el adaptador
         establecerAdaptador()
 

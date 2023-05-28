@@ -17,11 +17,14 @@ class BDSQLite(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         private const val COLUMN_FECHA_FIN = "fecha_fin"
         private const val COLUMN_FECHA_INICIO = "fecha_inicio"
         private const val COLUMN_RECORDATORIO = "recordatorio"
+        private const val COLUMN_ESTADO = "estado"
         private const val COLUMN_FRECUENCIA = "frecuencia"
         private const val COLUMN_PORCENTAJE = "porcentaje"
+
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+
         val createTableQuery = "CREATE TABLE $TABLE_NAME (" +
                 "$COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMN_TITULO TEXT, " +
@@ -29,13 +32,13 @@ class BDSQLite(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
                 "$COLUMN_FECHA_FIN TEXT, " +
                 "$COLUMN_FECHA_INICIO TEXT, " +
                 "$COLUMN_RECORDATORIO BOOLEAN, " +
+                "$COLUMN_ESTADO INTEGER, " +
                 "$COLUMN_FRECUENCIA TEXT, " +
                 "$COLUMN_PORCENTAJE INTEGER)"
         db.execSQL(createTableQuery)
-    }
-
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
     }
+
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {}
 
 }

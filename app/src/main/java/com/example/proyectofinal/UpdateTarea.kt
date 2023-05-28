@@ -8,5 +8,9 @@ class UpdateTarea : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         setContentView(R.layout.activity_update_tarea)
+
+        val tarea = intent.getParcelableExtra("extra_update", Tarea::class.java)!!
+
+
     }
 }
