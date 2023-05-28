@@ -87,14 +87,17 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         db.close()
     }
 
-    fun eliminarTarea(tarea: Tarea) {
+    fun eliminarTarea(tarea: Tarea): Boolean {
+
         val db = databaseHelper.writableDatabase
 
         val selection = "$COLUMN_ID = ?"
         val selectionArgs = arrayOf(tarea.id.toString())
 
-        db.delete(TABLE_NAME, selection, selectionArgs)
+        val filasEliminadas = db.delete(TABLE_NAME, selection, selectionArgs)
         db.close()
+
+        return filasEliminadas > 0
     }
 
     fun obtenerTodas(): MutableList<Tarea> {
@@ -116,7 +119,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
                 val frecuencia = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FRECUENCIA))
                 val porcentaje = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PORCENTAJE))
 
-                val tarea = Tarea(null, titulo, descripcion, fechaFin, fechaInicio, recordatorio, frecuencia,porcentaje)
+                val tarea = Tarea(id, titulo, descripcion, fechaFin, fechaInicio, recordatorio, frecuencia,porcentaje)
                 tareas.add(tarea)
             }
         }

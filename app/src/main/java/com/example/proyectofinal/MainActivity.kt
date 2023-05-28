@@ -3,6 +3,7 @@ package com.example.proyectofinal
 import android.content.Intent
 import android.os.Bundle
 import android.provider.SyncStateContract
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private var conexion = BDSQLite(this)
     private var modelo = ModeloTarea(conexion)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,16 @@ class MainActivity : AppCompatActivity() {
         modelo = ModeloTarea(conexion)
         //Inserción
         listaBD = modelo.obtenerTodas()
+
+        for (elemento in listaBD) {
+
+            //val mensaje = "Id: ${elemento.id}, Título: ${elemento.titulo}, Descripción: ${elemento.descripcion}"
+
+            //Log.e("Elemento", mensaje)
+
+            println(elemento)
+
+        }
 
         //Se establece el adaptador
         establecerAdaptador()

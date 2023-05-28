@@ -12,18 +12,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIUUUUUUU"
+        android:text=""
         android:layout_gravity="center"
         android:textSize="30sp"
         android:layout_marginBottom="15dp"
+        android:id="@+id/txtTituloRead"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/para"
+        android:text=""
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
+        android:id="@+id/txtParaElRead"
         />
 
     <ProgressBar
@@ -38,9 +40,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="25%"
+        android:text=""
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
+        android:id="@+id/txtPorcentajeRead"
         />
 
     <TextView
@@ -53,8 +56,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Un chingo de texto de relleno porque aquí dbeería ir la descripcioón de la actividad"
+        android:text=""
         android:layout_marginBottom="20dp"
+        android:id="@+id/txtDescripcionRead"
         />
 
     <TextView
@@ -109,7 +113,8 @@
                 android:layout_width="150px"
                 android:layout_height="150px"
                 android:src="@mipmap/trash"
-                android:contentDescription="@string/eliminar" />
+                android:contentDescription="@string/eliminar"
+                android:id="@+id/deleteTarea"/>
 
             <TextView
                 android:layout_width="wrap_content"
