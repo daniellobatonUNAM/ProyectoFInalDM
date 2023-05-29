@@ -1,9 +1,11 @@
 package com.example.proyectofinal
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,8 +32,11 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item: Tarea = dataList[position]
+        val sortedDataList = dataList.sortedByDescending { calcularDiferenciaDias(it.fechaInicio, it.fechaFinalizacion) }
+        val item: Tarea = sortedDataList[position]
+
         holder.textViewTitulo.text = item.titulo
+
         val diasDiferencia = calcularDiferenciaDias(item.fechaFinalizacion, item.fechaInicio)
         if(diasDiferencia == 0){
             holder.textViewFecha.text = "Para hoy"
@@ -40,7 +45,19 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
         }else{
             holder.textViewFecha.text = diasDiferencia.toString() + " días restantes"
         }
+
         holder.textViewPorcentaje.text = item.porcentaje.toString() + "% completada"
+        val color: Int
+        if(item.porcentaje!! < 60){
+            color = ContextCompat.getColor(holder.itemView.context, R.color.malo)
+        }else if(item.porcentaje!! < 75){
+            color = ContextCompat.getColor(holder.itemView.context, R.color.regular)
+        }else{
+            color = ContextCompat.getColor(holder.itemView.context, R.color.bueno)
+        }
+        holder.textViewPorcentaje.setTextColor(color)
+
+
         holder.bind(item)
 
         holder.itemView.setOnClickListener {

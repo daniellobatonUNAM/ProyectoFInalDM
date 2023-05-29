@@ -11,4 +11,10 @@
     <!-- Azul app -->
     <color name="principal">#40AEEC</color>
     <color name="gris">#D3D3D3</color>
+
+    <!-- Porcentajes -->
+    <color name="malo">#b4436c</color>
+    <color name="regular">#f2c14e</color>
+    <color name="bueno">#58bc82</color>
+
 </resources>
