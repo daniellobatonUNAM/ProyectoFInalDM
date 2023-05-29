@@ -130,22 +130,28 @@ class AddTarea : AppCompatActivity() {
         conexion = BDSQLite(this)
         val modelo = ModeloTarea(conexion)
 
-        //Inserción de una nueva Tarea
-        val idInsertado = modelo.insertarTarea(Tarea(null, titulo,
+        val tareaNueva = Tarea(null, titulo,
             descripcion, fechaTermino, fechaIniciacion,
-            recordatorio, 0, frecuencia,0))
+            recordatorio, 0, frecuencia,0)
 
-        if (idInsertado != -1L) {
+        if(validarFormAdd(tareaNueva)){
 
-            Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
+            //Inserción de una nueva Tarea
+            val idInsertado = modelo.insertarTarea(tareaNueva)
 
-        } else {
+            if (idInsertado != -1L) {
 
-            Toast.makeText(this, "Falló el registro", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Se ha registrado una nueva tarea", Toast.LENGTH_LONG).show()
+
+            } else {
+
+                Toast.makeText(this, "Falló el registro", Toast.LENGTH_LONG).show()
+
+            }
+
+            finish()
 
         }
-
-        finish()
 
     }
 
@@ -179,5 +185,47 @@ class AddTarea : AppCompatActivity() {
 
         // Muestra el diálogo del selector de fecha
         datePicker.show()
+    }
+
+    fun validarFormAdd(tarea: Tarea): Boolean{
+
+        if(tarea.titulo == ""){
+            Toast.makeText(this, "Debes ingresar un título para tu tarea", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(tarea.descripcion == ""){
+            Toast.makeText(this, "Debes ingresar una descripción para tu tarea", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(tarea.fechaFinalizacion == ""){
+            Toast.makeText(this, "Debes ingresar una fecha de finalización para tu tarea", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(tarea.fechaInicio == ""){
+            Toast.makeText(this, "Debes ingresar una fecha de inicio para tu tarea", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val dateFin: Date = dateFormat.parse(tarea.fechaFinalizacion)
+        val dateInicio: Date = dateFormat.parse(tarea.fechaInicio)
+
+        if(dateInicio > dateFin){
+            Toast.makeText(this, "La fecha de inicio debe ser antes que la de finalización", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if(tarea.deseaRecoratorio!!){
+            if(tarea.frecuenciaRecordatorio == ""){
+                Toast.makeText(this, "Debes seleccionar una opción de notificaciones", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+
+        return true
+
     }
 }
