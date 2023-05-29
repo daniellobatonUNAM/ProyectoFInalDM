@@ -68,7 +68,7 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         return tareas
     }
 
-    fun actualizarTarea(tarea: Tarea) {
+    fun actualizarTarea(tarea: Tarea): Boolean {
 
         val idK: String = COLUMN_ID
 
@@ -87,8 +87,10 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         val selection = "$COLUMN_ID = ?"
         val selectionArgs = arrayOf(tarea.id.toString())
 
-        db.update(TABLE_NAME, contentValues, selection, selectionArgs)
+        val rowsAffected = db.update(TABLE_NAME, contentValues, selection, selectionArgs)
         db.close()
+
+        return rowsAffected > 0
     }
 
     fun eliminarTarea(tarea: Tarea): Boolean {

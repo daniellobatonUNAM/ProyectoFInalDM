@@ -4,15 +4,15 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Tarea (
-    val id: Long?,
-    val titulo: String,
-    val descripcion: String,
-    val fechaFinalizacion: String,
-    val fechaInicio: String,
-    val deseaRecoratorio: Boolean?,
-    val estado: Int?,
-    val frecuenciaRecordatorio: String?,
-    val porcentaje: Int?
+    var id: Long?,
+    var titulo: String,
+    var descripcion: String,
+    var fechaFinalizacion: String,
+    var fechaInicio: String,
+    var deseaRecoratorio: Boolean?,
+    var estado: Int?,
+    var frecuenciaRecordatorio: String?,
+    var porcentaje: Int?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Long::class.java.classLoader) as? Long,

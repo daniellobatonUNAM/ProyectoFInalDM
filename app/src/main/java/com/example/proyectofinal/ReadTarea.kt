@@ -152,10 +152,10 @@ class ReadTarea : AppCompatActivity() {
 
             if (actualizacionExitosa) {
 
-                estadoRead.text = getString(R.string.estado) + "En progreso"
+                estadoRead.text = getString(R.string.estado) + " En progreso"
                 layoutIniciar.visibility = View.INVISIBLE
 
-                Toast.makeText(this, "La tarea ${tarea.titulo} ha iniciado. Ahora puedes ir modificando su progreso desde Editar tarea", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Ahora puedes editar tu progreso desde 'Editar tarea'", Toast.LENGTH_LONG).show()
 
             } else {
 

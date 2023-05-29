@@ -106,7 +106,6 @@ class AddTarea : AppCompatActivity() {
         val fechaIniciacion = fechaInicio.trim()
 
         val recordatorio: Boolean;
-
         var frecuencia: String
 
         if(datosCompletos_f){

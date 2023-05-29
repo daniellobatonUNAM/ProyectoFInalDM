@@ -36,5 +36,7 @@
     <string name="iniciar">Iniciar tarea</string>
     <string name="title_activity_add_tarea">AddTarea</string>
 
+    <!-- Edit tarea -->
+    <string name="progreso_actual">¿Cuál es tu progreso?</string>
 
 </resources>
