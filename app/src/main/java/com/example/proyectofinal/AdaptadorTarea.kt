@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<AdaptadorTarea.ViewHolder>() {
 
@@ -29,7 +32,14 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item: Tarea = dataList[position]
         holder.textViewTitulo.text = item.titulo
-        holder.textViewFecha.text = item.fechaFinalizacion
+        val diasDiferencia = calcularDiferenciaDias(item.fechaFinalizacion, item.fechaInicio)
+        if(diasDiferencia == 0){
+            holder.textViewFecha.text = "Para hoy"
+        }else if(diasDiferencia == 1){
+            holder.textViewFecha.text = "Un día restante"
+        }else{
+            holder.textViewFecha.text = diasDiferencia.toString() + " días restantes"
+        }
         holder.textViewPorcentaje.text = item.porcentaje.toString() + "% completada"
         holder.bind(item)
 
@@ -44,6 +54,18 @@ class AdaptadorTarea (private val dataList: List<Tarea>) : RecyclerView.Adapter<
 
     interface ItemClickListener {
         fun onItemClick(tarea: Tarea)
+    }
+
+    fun calcularDiferenciaDias(fechaInicio: String, fechaFin: String): Int{
+
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val fechaInicio: Date = dateFormat.parse(fechaInicio)
+        val fechaFinalizacion: Date = dateFormat.parse(fechaFin)
+
+        val diferenciaMilisegundos = fechaFinalizacion.time - fechaInicio.time
+        val diferenciaDias = TimeUnit.MILLISECONDS.toDays(diferenciaMilisegundos)
+
+        return diferenciaDias.toInt() * -1
     }
 
 }
