@@ -133,7 +133,7 @@ class AddTarea : AppCompatActivity() {
         //Inserción de una nueva Tarea
         val idInsertado = modelo.insertarTarea(Tarea(null, titulo,
             descripcion, fechaTermino, fechaIniciacion,
-            recordatorio, null, frecuencia,null))
+            recordatorio, 0, frecuencia,0))
 
         if (idInsertado != -1L) {
 

@@ -60,7 +60,14 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableroPendientes"
+                />
+
         </LinearLayout>
+
     </ScrollView>
 
     <ScrollView
@@ -84,7 +91,14 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableroEnCurso"
+                />
+
         </LinearLayout>
+
     </ScrollView>
 
     <ScrollView
@@ -108,7 +122,14 @@
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableroTerminadas"
+                />
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

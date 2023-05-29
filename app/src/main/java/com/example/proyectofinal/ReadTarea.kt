@@ -20,8 +20,6 @@ class ReadTarea : AppCompatActivity() {
     private lateinit var btnDelete: ImageButton
     private lateinit var btnIniciar: ImageButton
 
-    private lateinit var layoutIniciar: LinearLayout
-
     private lateinit var conexion: BDSQLite
 
 
@@ -65,15 +63,11 @@ class ReadTarea : AppCompatActivity() {
         btnDelete = findViewById(R.id.deleteTarea)
         deleteTarea(tarea)
 
-        layoutIniciar = findViewById(R.id.layoutIniciar)
-        btnIniciar = findViewById(R.id.btnIniciarTarea)
-        iniciarTarea(tarea)
 
         if(tarea.estado == 0){
             estadoRead.text = getString(R.string.estado) + " No iniciado"
         }else if(tarea.estado == 1){
             estadoRead.text = getString(R.string.estado) + "En progreso"
-            layoutIniciar.visibility = View.INVISIBLE
         }
 
     }
@@ -88,12 +82,16 @@ class ReadTarea : AppCompatActivity() {
 
         btnEdit.setOnClickListener(){
 
+            Log.e("Estado", tarea.estado.toString())
+
             val intent = Intent(this, UpdateTarea::class.java)
             val bundle = Bundle()
             bundle.putParcelable("extra_update", tarea)
             intent.putExtras(bundle)
 
             startActivity(intent)
+
+            finish()
         }
 
 
@@ -138,34 +136,6 @@ class ReadTarea : AppCompatActivity() {
             dialog.show()
 
         }
-    }
-
-    fun iniciarTarea(tarea: Tarea){
-
-        btnIniciar.setOnClickListener(){
-
-            conexion = BDSQLite(this)
-
-            val modelo = ModeloTarea(conexion)
-
-            val actualizacionExitosa = modelo.iniciarTarea(tarea)
-
-            if (actualizacionExitosa) {
-
-                estadoRead.text = getString(R.string.estado) + " En progreso"
-                layoutIniciar.visibility = View.INVISIBLE
-
-                Toast.makeText(this, "Ahora puedes editar tu progreso desde 'Editar tarea'", Toast.LENGTH_LONG).show()
-
-            } else {
-
-                Toast.makeText(this, "Error al iniciar tarea", Toast.LENGTH_LONG).show()
-
-            }
-
-        }
-
-
     }
 
 }

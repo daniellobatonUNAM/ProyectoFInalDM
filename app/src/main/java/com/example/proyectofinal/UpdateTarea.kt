@@ -50,6 +50,9 @@ class UpdateTarea : AppCompatActivity() {
 
         tarea = intent.getParcelableExtra("extra_update", Tarea::class.java)!!
 
+        datosCompletos = tarea.deseaRecoratorio!!
+        valorProgress = tarea.porcentaje!!
+
         //Se inicializan los campos
         tituloTarea = findViewById(R.id.inputNombreEdit)
         tituloTarea.text = tarea.titulo //placeholder título

@@ -132,32 +132,24 @@ class ModeloTarea(private val databaseHelper: BDSQLite)  {
         }
 
         return tareas
-
     }
 
-    fun iniciarTarea(tarea: Tarea): Boolean{
+    fun obtenerTitulosPorEstado(estado: Int): MutableList<String> {
 
-        /*
-            0: No Iniciado
-            1: En progreso
-            2: Terminada
-         */
+        val db = databaseHelper.readableDatabase
+        val titulos = mutableListOf<String>()
 
-        val idK: String = COLUMN_ID
+        val selection = "$COLUMN_ESTADO = ?"
+        val selectionArgs = arrayOf(estado.toString())
 
-        val db = databaseHelper.writableDatabase
-        val contentValues = ContentValues().apply {
-            put(COLUMN_ESTADO, 1)
+        db.query(TABLE_NAME, arrayOf(COLUMN_TITULO), selection, selectionArgs, null, null, null)?.use { cursor ->
+            while (cursor.moveToNext()) {
+                val titulo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITULO))
+                titulos.add(titulo)
+            }
         }
 
-        val selection = "$COLUMN_ID = ?"
-        val selectionArgs = arrayOf(tarea.id.toString())
-
-        val rowsAffected = db.update(TABLE_NAME, contentValues, selection, selectionArgs)
-        db.close()
-
-        return rowsAffected > 0
-
+        return titulos
     }
 
 }
